@@ -1,9 +1,12 @@
 @extends('templates.baseTemplate')
 
-@section('title', 'Liste d'utilisateurs)
+@section('title')
 
 @section('content')
 
+@if(isset($deleted))
+<p>L'utilisateur {{$deleted}} a été effacé avec succès!</p>
+@endif
 
 <table>
 	<tr>
@@ -12,20 +15,24 @@
 		<th>Statut</th>
 	</tr>
 
-@foreach($user as $each_user)
+@foreach($users as $user)
 	<tr>
-		<td>{{HTML::linkRoute('user.show','$each_user->surname',['id'->$each_user->id]);}}</td>
-		<td>{{$each_user->name}}</td>
-		<td>{{$each_user->status}</td>
-		<td>{{HTML::linkRoute('user.edit','Editer',['id'->$each_user->id]);}}
-		<td>{{Form::open(['route'=>'user.destroy','method'=>'delete'])}}
-				{{Form::submit('Supprimer')}}
-				{{Form::hidden('id',$each_user->id)}}
+		<td>{{Html::linkRoute('user.show',$user->surname,['id'=>$user->id])}}</td>
+		<td>{{$user->name}}</td>
+		<td>{{$user->status}}</td>
+		<td>{{Html::linkRoute('user.edit','Editer',['id'=>$user->id])}}
+		@if($user->status != 2)
+		<td>{{Form::open(['route'=>['user.destroy', $user->id],'method'=>'DELETE'])}}
+				{{Form::submit('Supprimer', ['class' => 'btn btn-danger'])}}
+				{{Form::hidden('id', $user->id)}}
 			{{Form::close()}}
 		</td>
-		@if($each_user->status == 0)
+		@endif
+		@if($user->status == 0)
 			<td>
-				{{HTML::linkRoute('user.validate','Valider',['id'->$each_user->id]);}}
+				{{Html::linkRoute('user.index','Valider',['id'=>$user->id])}}
 			</td>
+        @endif
 	</tr>
+@endforeach
 @endsection
