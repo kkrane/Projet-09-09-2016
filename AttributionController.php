@@ -62,12 +62,7 @@ class AttributionController extends Controller
         $spot = array_rand($spotlibre ,1);
         $attribution->spot_id = $spot;
         $attribution->end_at = Carbon::now()->addMonth(1);
-        /** if(!empty($spot))
-            $attribution->spot_id = $spot;
-        else
-            return redirect()->route('user.waitinglist', [$user]);
-
-        $attribution->save();**/
+        $attribution->save();
         
     }
 
