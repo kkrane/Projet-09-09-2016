@@ -63,10 +63,21 @@ class AttributionController extends Controller
    
         if($nb_spot_all == $nb_spot_use){
             $last = User::where('list','>','0')->orderBy('list','desc')->first();
-            $last++;
-            $users->list = $last;
+            
+            
+            if($last == null){
+                
+                $users->list = 1;
+                $users->save();
+
+                return redirect('/');
+            }
+            $last->list++;
+
+            $users->list = $last->list;
+            
             $users->save();
-            return redirect()->route('/');
+            return redirect('/'); 
         }
 
         /*** S'il y a des places on lui en donne une nouvelle ***/
@@ -94,7 +105,7 @@ class AttributionController extends Controller
         $attribution->spot_id = $test;
         $attribution->end_at = Carbon::now()->addMonth(1);
         $attribution->save();
-        return redirect()->route('/');
+        return redirect('/');
     }
 
     /**
