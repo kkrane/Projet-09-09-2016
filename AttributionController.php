@@ -36,14 +36,14 @@ class AttributionController extends Controller
         $attribution->user_id = $users->id;
 
         /** Génération aléatoire de la place **/
-        $spotall = Spot::all();
+        $spot_all = Spot::all();
         $i = 0;
 
-        foreach ($spotall as $spot){
+        foreach ($spot_all as $spot){
             $spot_id_tmp = $spot->id;
             $tbl_spot_id[$i] = $spot_id_tmp; 
             $i++;
-            var_dump($spot->id);
+            
         }
         
         $spot_use = Attribution::where('end_at','>',\Carbon::now())->get();
@@ -55,7 +55,21 @@ class AttributionController extends Controller
             $spot_attr_id = $spot_attr->spot_id;
             $tbl_spot_id_attr[$i] = $spot_attr_id; 
             $i++;
+
         }
+        /*** Comparer s'il y a des places libres ***/
+        $nb_spot_all = count($spot_use);
+        $nb_spot_use = count($spot_all);
+   
+        if($nb_spot_all == $nb_spot_use){
+            $last = User::where('list','>','0')->orderBy('list','desc')->first();
+            $last++;
+            $users->list = $last;
+            $users->save();
+            return redirect()->route('/');
+        }
+
+        /*** S'il y a des places on lui en donne une nouvelle ***/
 
         $i = 0;
         $y = 0;
@@ -74,13 +88,12 @@ class AttributionController extends Controller
         
         $spot = array_rand($spotlibre ,1);
         $test = $spotlibre[$spot];
-        return var_dump($test);
+        
         /** On récupère un numéro de place libre et on l'attribue à spot_id **/
 
         $attribution->spot_id = $test;
         $attribution->end_at = Carbon::now()->addMonth(1);
         $attribution->save();
-        
         return redirect()->route('/');
     }
 
