@@ -79,7 +79,9 @@ class AttributionController extends Controller
 
         $attribution->spot_id = $test;
         $attribution->end_at = Carbon::now()->addMonth(1);
-        //$attribution->save();
+        $attribution->save();
+        
+        return redirect()->route('/');
     }
 
     /**
