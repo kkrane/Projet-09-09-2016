@@ -1,0 +1,43 @@
+body {
+    font-family: 'Lato';
+}
+
+.fa-btn {
+    margin-right: 6px;
+}
+
+
+.btn a{
+    text-decoration: none;
+    color: white;
+}
+
+.adminButtons{
+    text-align: center;
+    padding:15px;
+    color:white;
+}
+.adminButtons a{
+    line-height: 80px;
+    color:black;
+    font-size: 18px;
+}
+.adminButton{
+    border-radius: 10px;
+}
+.adminButton span{
+}
+.blue{
+    background-color:blue;
+}
+
+.yellow{
+    background-color: yellow;
+}
+
+.red{
+    background-color: red;
+}
+.pink{
+    background-color: pink;
+}
