@@ -35,7 +35,7 @@ class SpotRequest extends Request
                 return [
                     'num' => 'required|numeric|unique:spots,num,'.$id,
                     'type' => 'required|in:0,1,2'
-                ]
+                ];
             }
             default:
                 break;

@@ -106,6 +106,7 @@ class FrontEndController extends Controller
             /** On récupère un numéro de place libre et on l'attribue à spot_id **/ 
 
             $attribution->spot_id = $test;
+            $attribution->begin_at = Carbon::now();
             $attribution->end_at = Carbon::now()->addMonth(1);
             $attribution->save();
             }
@@ -132,6 +133,16 @@ class FrontEndController extends Controller
     {
         if(!Auth::user()){
             return view('login_form');
+        }
+    }
+    
+    public function docUser(){
+        return view('doc_user');
+    }
+    
+    public function docAdmin(){
+        if(\Auth::user() && \Auth::user()->status == 2){
+            return view('doc_admin');
         }
     }
 }

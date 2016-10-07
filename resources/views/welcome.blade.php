@@ -11,7 +11,7 @@
                         <div class="adminButtons">
                             <a href="user"><div class="col-xs-3 adminButton blue"><span class="fa fa-user"> {{$nbUser}} Utilisateurs</span></div></a>
                             <a href="spot"><div class="col-xs-3 adminButton yellow"><span class="fa fa-car"> {{$nbSpot}} Places</span></div></a>
-                            <a href="attribtuion"><div class="col-xs-3 adminButton red"><span class="fa fa-user"> {{$nbAttribution}} Attributions</span></div></a>
+                            <a href="attribution"><div class="col-xs-3 adminButton red"><span class="fa fa-user"> {{$nbAttribution}} Attributions</span></div></a>
                             <a href="contact"><div class="col-xs-3 adminButton pink"><span class="fa fa-user"> {{$nbTicket}} Tickets</span></div></a>
                             
                             <h1>Liste d'attente des utilisateurs</h1>

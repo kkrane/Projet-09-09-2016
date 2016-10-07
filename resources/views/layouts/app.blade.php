@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="{{env('APP_URL')}}resources/css/style.css">
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
+    @yield('css')
 
 </head>
 <body id="app-layout">
@@ -39,7 +40,11 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/') }}">Acceuil</a></li>
+                    <li><a href="{{ url('/') }}">Accueil</a></li>
+                    <li><a href="{{url('/doc')}}">Documentation</a></li>
+                    @if(Auth::user() && Auth::user()->status == 2)
+                        <li><a href="{{url('/doc/admin')}}">Documentation admin</a></li>
+                    @endif
                 </ul>
 
                 <!-- Right Side Of Navbar -->

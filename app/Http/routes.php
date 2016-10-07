@@ -17,10 +17,16 @@ Route::group(['middleware'=>'auth'],function(){
     Route::get('/user/validation/{id}', 'UserController@validation')->name('user.validation');
     Route::resource('/spot', 'SpotController');
     Route::resource('/ticket', 'TicketController');
-    Route::resource('/Attribution', 'AttributionController');
+    Route::resource('/attribution', 'AttributionController');
     Route::get('/', 'FrontEndController@index');
     Route::get('/newspot', 'AttributionController@create');
     Route::resource('/contact','TicketController');
+    Route::get('/attribution/admin/create','AttributionController@myCreate');
+    Route::post('/attribution/admin/create','AttributionController@adminStore');
+    Route::get('/attribution/admincreate/{id}','AttributionController@adminEdit');
+    Route::put('/attribution/admincreate/{id}','AttributionController@adminUpdate');
+    Route::get('/doc','FrontEndController@docUser');
+    Route::get('/doc/admin','FrontEndController@docAdmin');
 
 });
 

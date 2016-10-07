@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Spot;
 use App\Attribution;
+use App\Ticket;
 
 class HomeController extends Controller
 {
